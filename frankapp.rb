@@ -157,10 +157,10 @@ __END__
 </ul>
 
 <p>Resources</p>
-  <ul>
-    <li><a href="http://learnrubythehardway.org/book/ex51.html">double-check
-    HTML form syntax</a></li>
-  </ul>
+<ul>
+  <li><a href="http://learnrubythehardway.org/book/ex51.html">double-check
+  HTML form syntax</a></li>
+</ul>
 
 
 @@ screenshots
