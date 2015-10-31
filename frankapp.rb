@@ -66,8 +66,8 @@ __END__
   <a href='/api/contacts'>/api/contacts</a>
   ] </p>
 <p><strong>Doc Links</strong> [
-  <a href='/commentary'>Commentary</a>] |
-  <a href='/screenshots'>Screenshots</a>]
+  <a href='/commentary'>Commentary</a> |
+  <a href='/screenshots'>Screenshots</a>
   ] </p>
 
 <p><strong>Add Contact</strong></p>
