@@ -1,3 +1,4 @@
+#  IP=0.0.0.0 ruby frankapp.rb
 require 'sinatra'
 require 'mongoid'
 
@@ -16,7 +17,7 @@ class Komrade
 end
 
 get '/' do
-  @kall = Komrade.all
+  @kall = Komrade.all.desc(:_id)
   erb :index
 end
 
@@ -28,16 +29,27 @@ get '/screenshots' do
   erb :screenshots
 end
 
-get '/api/contacts' do 
+get '/api/contacts' do
   @kall = Komrade.all.to_json
 end
 
-get '/api/contact/:id' do 
-  @k = Komrade.find(params[:id]).to_json  
+get '/api/contact/:id' do
+  @k = Komrade.find(params[:id]).to_json
 end
 
 post '/api/contact' do
-  
+end
+
+post '/contact' do
+  @k = Komrade.new(
+    :name => params[:name],
+    :email => params[:email],
+    :number => params[:number]
+  )
+  @k.save! # no error checking at all? :/
+  @kall = Komrade.all.desc(:_id)
+  redirect to('/')
+  # erb :index
 end
 
 get '/seed-the-db' do
@@ -50,18 +62,32 @@ __END__
 
 @@ index
 <div style="float:right;"><%= Time.now %></div>
-<p><strong>Links</strong> [
-  <a href='/commentary'>Commentary</a>] | 
-  <a href='/screenshots'>Screenshots</a>] | 
-  <a href='/api/contacts'>/api/contacts</a> 
-  ]</p>
+<p><strong>API Links</strong> [
+  <a href='/api/contacts'>/api/contacts</a>
+  ] </p>
+<p><strong>Doc Links</strong> [
+  <a href='/commentary'>Commentary</a>] |
+  <a href='/screenshots'>Screenshots</a>]
+  ] </p>
+
+<p><strong>Add Contact</strong></p>
+
+<form action="/contact" method="POST">
+  <fieldset>
+    <code>nam:</code> <input type="text" name="name"> <br/>
+    <code>eml:</code> <input type="text" name="email"> <br/>
+    <code>nbr:</code> <input type="text" name="number"> <br/>
+    <input type="submit" style="margin-left:6em;">
+  </fieldset>
+</form>
+
 <p><strong>The Contacts</strong></p>
 <ul>
   <% @kall.each do |komrade| %>
     <li>
-      <%= komrade.name %> 
+      <%= komrade.name %>
       <code><%= komrade.id.to_s %></code>
-      <a href="/api/contact/<%= komrade.id.to_s %>">api/contact/:id</a>
+      [ <a href="/api/contact/<%= komrade.id.to_s %>">api/contact/:id</a> ]
     </li>
   <% end %>
 </ul>
@@ -71,7 +97,7 @@ __END__
 <h3><a href='/'>Back</a></h3>
 
 <p>I have several more hours into this IDE now and I can say that it works
-  for me. I could use this as my "daily driver" although I did just install 
+  for me. I could use this as my "daily driver" although I did just install
   the latest version of Atom (atom.io) on my workstation.
 </p>
 
@@ -79,36 +105,36 @@ __END__
   forgot most of the basics. I've never really understood how the "@@" magic
   occurs but it's convenient to have all the routing, logic and templates in
   one file. At the beginning of a project anyway, until that one file gets
-  too large. 
+  too large.
 </p>
 
 <p>To use this Sinatra app as an API for the Contact List project:</p>
 <ol>
-  <li><strong>Database</strong> 
-    MongoDB installed, and a Terminal running the mongod daemon 
+  <li><strong>Database</strong>
+    MongoDB installed, and a Terminal running the mongod daemon
     (or figure out how to daemonize it)
   </li>
-  <li><strong>Back-end server</strong> 
-    This Sinatra app and its gems (mongoid and sinatra) installed, 
+  <li><strong>Back-end server</strong>
+    This Sinatra app and its gems (mongoid and sinatra) installed,
     and a Terminal window running the app
   </li>
-  <li><strong>Front-end server</strong> 
-    The Contact List app itself (and its dependencies) , 
+  <li><strong>Front-end server</strong>
+    The Contact List app itself (and its dependencies) ,
     and a Terminal window running the app
   </li>
 </ol>
 
 <p>Complaints</p>
 <ul>
-  <li>The $IP and $PORT values; over in Rubyland, these are 
-    (obviously, in hindsight) found in ENV['IP'] and ENV['PORT'] 
-    but... if you're like me, you'll expect things to be 
+  <li>The $IP and $PORT values; over in Rubyland, these are
+    (obviously, in hindsight) found in ENV['IP'] and ENV['PORT']
+    but... if you're like me, you'll expect things to be
     more complicated so you won't even look there.
   </li>
-  <li>Faffed around a while getting Sinatra to listen to the 
+  <li>Faffed around a while getting Sinatra to listen to the
     right IP/PORT. I tried creating a "Custom Runner" but that
-    failed for me. Then I found out about setting :port and :bind 
-    in a configure block at the top of the Sinatra app itself. Sorted. 
+    failed for me. Then I found out about setting :port and :bind
+    in a configure block at the top of the Sinatra app itself. Sorted.
   </li>
   <li>So there's a Terminal with a running MongoDB. Not sure how
     to daemonize it so it just sits there, running.
@@ -117,18 +143,23 @@ __END__
     using MongoDB and its BSON document ID. Instead of a normal ID
     it returns an object <code>
     "_id":{"$oid":"563428016d09887227000000"}
-    </code>. 
-    There are numerous ways to fix this at the server but I 
+    </code>.
+    There are numerous ways to fix this at the server but I
     don't have the gumption right now.
   </li>
-  <li>I should build the POST action and a form to exercise it, 
+  <li>I should build the POST action and a form to exercise it,
     but I'd rather take a nap...zzzz
   </li>
   <li>MongoDB should probably have a "Runner" script so its Terminal
     window would look like "frankapp.rb" with a Start/Stop button,
     reload button, etc.
   </li>
-  
+
+<p>Resources</p>
+  <ul>
+    <li><a href="http://learnrubythehardway.org/book/ex51.html">double-check
+    HTML form syntax</a></li>
+
 </ul>
 
 
@@ -145,5 +176,3 @@ __END__
 </ul>
 <img src="SS-coli-sinCloud9.png" />
 </div>
-
-
