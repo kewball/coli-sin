@@ -1,6 +1,14 @@
 development:
+  # sessions:
   clients:
     default:
-      database: mongoid
-      hosts:
-        - localhost:27017
+      uri: mongodb://<%= ENV['IP'] %>:27017/coli
+  options:
+  
+# development:
+  # clients:
+    # default:
+      # database: mongoid
+      # hosts:
+        # - <%= ENV['IP'] %>:27017
+
