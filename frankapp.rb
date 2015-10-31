@@ -20,8 +20,8 @@ get '/' do
   erb :index
 end
 
-get '/complaints' do
-  erb :complaints
+get '/commentary' do
+  erb :commentary
 end
 
 get '/api/contacts' do 
@@ -47,7 +47,7 @@ __END__
 @@ index
 <div style="float:right;"><%= Time.now %></div>
 <p><strong>Links</strong> [
-  <a href='/complaints'>Complaints</a>] | 
+  <a href='/commentary'>Commentary</a>] | 
   <a href='/api/contacts'>/api/contacts</a> 
   ]</p>
 <p><strong>The Contacts</strong></p>
@@ -55,29 +55,50 @@ __END__
   <% @kall.each do |komrade| %>
     <li>
       <%= komrade.name %> 
-      <%= komrade.id.to_s %>
+      <code><%= komrade.id.to_s %></code>
       <a href="/api/contact/<%= komrade.id.to_s %>">api/contact/:id</a>
     </li>
   <% end %>
 </ul>
 
 
-@@ complaints
+@@ commentary
 <p><a href='/'>to the beginning</a></p>
-<p>Things that were a bit sucky</p>
 <ul>
-  <li>The $IP and $PORT valuses; over in Rubyland, these are 
-  (obviously, in hindsight) found in ENV['IP'] and ENV['PORT'] 
-  but... if you're like me, you'll expect things to be 
-  more complicated so you won't even look there.</li>
-  <li>So there's a Terminal with a running Mongo. Not sure how
-  to daemonize it so it just sits there, running</li>
+  <li>To actually use this Sinatra app as an API you'd need
+    <ol>
+      <li>MongoDB installed, and a Terminal running the mongod daemon 
+        (or figure out how to daemonize it)
+      </li>
+      <li>This Sinatra app and its gems (mongoid and sinatra) installed, 
+        and a Terminal window running the app
+      </li>
+      <li>The Contact List app itself, configured to use http://contacts, etc
+        for its "back end" data
+      </li>
+    </ol>
+  </li>
+  <li>The $IP and $PORT values; over in Rubyland, these are 
+    (obviously, in hindsight) found in ENV['IP'] and ENV['PORT'] 
+    but... if you're like me, you'll expect things to be 
+    more complicated so you won't even look there.
+  </li>
+  <li>Faffed around a while getting Sinatra to listen to the 
+    right IP/PORT. I tried creating a "Custom Runner" but that
+    failed for me. Then I found out about setting :port and :bind 
+    in a configure block at the top. Sorted. 
+  </li>
+  <li>So there's a Terminal with a running MongoDB. Not sure how
+    to daemonize it so it just sits there, running.
+  </li>
   <li>Ruby's "to_json" is convenient but it is sub-optimal when
-  using MongoDB and the BSON document ID. Instead of a normal ID
-  it returns an object. There are numerous ways to fix this at
-  the server but I don't have the gumption right now.</li>
+    using MongoDB and its BSON document ID. Instead of a normal ID
+    it returns an object. There are numerous ways to fix this at
+    the server but I don't have the gumption right now.
+  </li>
   <li>I should build the POST action and a form to exercise it, 
-  but I'd rather take a nap...zzzz</li>
+    but I'd rather take a nap...zzzz
+  </li>
   
 </ul>
 
