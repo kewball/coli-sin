@@ -128,7 +128,6 @@ __END__
     window would look like "frankapp.rb" with a Start/Stop button,
     reload button, etc.
   </li>
-  
 </ul>
 
 
