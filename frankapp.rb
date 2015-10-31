@@ -154,12 +154,15 @@ __END__
     window would look like "frankapp.rb" with a Start/Stop button,
     reload button, etc.
   </li>
+<<<<<<< HEAD
 
 <p>Resources</p>
   <ul>
     <li><a href="http://learnrubythehardway.org/book/ex51.html">double-check
     HTML form syntax</a></li>
 
+=======
+>>>>>>> bfac7a366786fb9f09fdeb69c5c30b688dca4b51
 </ul>
 
 
