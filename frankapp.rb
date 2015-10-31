@@ -98,8 +98,12 @@ __END__
 
 <p>I have several more hours into this IDE now and I can say that it works
   for me. I could use this as my "daily driver" although I did just install
-  the latest version of Atom (atom.io) on my workstation.
+  the latest version of Atom (atom.io) on my workstation. I have successfully
+  pushed changes to Github from c9 and my local workstation+VM. If I were to
+  setup my ssh keys at Github it would be seamless.
 </p>
+
+<p>Plus, I've "integrated" Github into the Slack. </p>
 
 <p>It was good to get back to Sinatra after a long enough absence that I
   forgot most of the basics. I've never really understood how the "@@" magic
@@ -147,8 +151,8 @@ __END__
     There are numerous ways to fix this at the server but I
     don't have the gumption right now.
   </li>
-  <li>I should build the POST action and a form to exercise it,
-    but I'd rather take a nap...zzzz
+  <li><strike>I should build the POST action and a form to exercise it,
+    but I'd rather take a nap...zzzz</strike> DONE.
   </li>
   <li>MongoDB should probably have a "Runner" script so its Terminal
     window would look like "frankapp.rb" with a Start/Stop button,
