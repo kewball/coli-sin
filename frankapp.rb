@@ -69,6 +69,9 @@ __END__
   <a href='/commentary'>Commentary</a> |
   <a href='/screenshots'>Screenshots</a>
   ] </p>
+<p><strong>New</strong> [
+  <a href='/screenshots#Sat1031'>new screenshot</a> 
+  ] </p>
 
 <p><strong>Add Contact</strong></p>
 
@@ -164,12 +167,19 @@ __END__
 <ul>
   <li><a href="http://learnrubythehardway.org/book/ex51.html">double-check
   HTML form syntax</a></li>
+  <li><strong>Fixing the Mongo Runner</strong> The clue is right here 
+  http://stackoverflow.com/questions/30740951/bash-command-not-found-cloud9-enviroment 
+  in the answer, "Be sure your runner is set to Ruby on Rails and not Shell". 
+  That, of course, isn't <em>my answer</em> but it points to the answer.</li>
 </ul>
 
 
 @@ screenshots
 
-<h3><a href='/'>Back</a></h3>
+<h3><a name="sstop" href='/'>Back</a></h3>
+[ <a href="#Fri1030">Fri 10/30</a> | <a href="#Sat1031">Sat 10/31</a> ]
+
+<a name="Fri1030"></a>
 <div style="padding:1em;">
 <p><strong>The Workspace</strong></p>
 <ul>
@@ -179,4 +189,17 @@ __END__
   <li>the Sinatra app code, upper left</li>
 </ul>
 <img src="SS-coli-sinCloud9.png" />
+</div>
+
+<a href="#sstop" name="Sat1031">up</a>
+<div style="padding:1em;">
+<p><strong>The Workspace</strong> The Mongo runner looks okay but I don't understand
+how or why it works. Shrug. :/</p>
+<ul>
+  <li>the MongoDB server, lower left</li>
+  <li>the Sinatra app Runner, lower right</li>
+  <li>the "Github" Terminal, upper right</li>
+  <li>the Sinatra app code, upper left</li>
+</ul>
+<img src="SS2-coli-sin-Cloud9.png" />
 </div>
